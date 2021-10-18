@@ -11,7 +11,7 @@
   - une base [Postgresql](https://github.com/bitnami/charts/tree/master/bitnami/postgresql)
   - un [Prometheus](https://github.com/prometheus-community/helm-charts/tree/main/charts/prometheus) pour collecter les métriques MongoDB, Postgresql et celles des APIs Metallica.
   - une base [InfluxDB](https://github.com/influxdata/helm-charts) pour stocker les métriques k6 
-  - un [Grafana](https://github.com/grafana/helm-charts) pour l'observation des métriques (https://grafana-poc-metallica.dev.insee.io) et ses dashboards (load-test/dashboards-grafana)
+  - un [Grafana](https://github.com/grafana/helm-charts) pour l'observation des métriques (https://grafana-poc-metallica.dev.insee.io) et ses dashboards
 - les scénarios métiers à tester (./scenarios)
 - les scripts js de test de performance k6 (load-test/k6)
 
