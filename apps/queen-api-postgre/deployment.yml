@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queen-api-postgres
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: queen-api-postgres
+  template:
+    metadata:
+      labels:
+        app: queen-api-postgres
+    spec:
+      containers:
+        - name: queen-api-postgres
+          image: inseefr/queen-back-office:glowroot-micrometer
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "6.2"
+              memory: "12.2Gi"
+            requests:
+              cpu: "6"
+              memory: "12Gi"
+          env:
+            - name: JAVA_OPTS
+              value: '-Dlogging.config=classpath:log4j2.xml -Dspring.profiles.active=dev -Dspring.config.location=classpath:/,${CATALINA_BASE}/webapps/queenbo.properties'
+            - name: FR_INSEE_QUEEN_APPLICATION_PERSISTENCETYPE
+              value: 'JPA'
+            - name: FR_INSEE_QUEEN_PERSISTENCE_DATABASE_HOST
+              value: 'my-postgresql'
+            - name: FR_INSEE_QUEEN_PERSISTENCE_DATABASE_PORT
+              value: '5432'
+            - name: FR_INSEE_QUEEN_PERSISTENCE_DATABASE_SCHEMA
+              value: 'poc'
+            - name: FR_INSEE_QUEEN_PERSISTENCE_DATABASE_USER
+              value: 'postgres'
+            - name: FR_INSEE_QUEEN_PERSISTENCE_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: queen-api-postgre-secret
+                  key: fr.insee.queen.persistence.database.password
+            - name: FR_INSEE_QUEEN_LOGGING_LEVEL
+              value: 'ERROR'
+      tolerations:
+        - key: "metallica"
+          operator: "Equal"
+          value: "perf"
+          effect: "NoSchedule"
+

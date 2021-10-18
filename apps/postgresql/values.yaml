@@ -1,0 +1,23 @@
+postgresql:
+  global:
+    postgresql:
+      existingSecret: postgresql-secret
+  postgresqlDatabase: poc
+  postgresqlExtendedConf: 
+    maxConnections: 300
+    sharedBuffers: 2000MB
+  metrics:
+    enabled: true
+  resources:
+    limits:
+      cpu: "2.2"
+      memory: "8.2Gi"
+    requests:
+      cpu: "2"
+      memory: "8Gi"
+  primary:
+    tolerations:
+      - key: "metallica"
+        operator: "Equal"
+        value: "perf"
+        effect: "NoSchedule"

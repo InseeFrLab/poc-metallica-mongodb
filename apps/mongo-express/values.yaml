@@ -1,0 +1,10 @@
+mongo-express:
+  existingSecret: mongo-express-secret
+  mongodbEnableAdmin: true
+  mongodbAuthDatabase: admin
+  mongodbServer: my-mongodb-0.my-mongodb-headless,my-mongodb-1.my-mongodb-headless,my-mongodb-2.my-mongodb-headless
+  tolerations:   
+    - key: "metallica"
+      operator: "Equal"
+      value: "perf"
+      effect: "NoSchedule"

@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sabiane-data-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sabiane-data-api
+  template:
+    metadata:
+      labels:
+        app: sabiane-data-api
+    spec:
+      containers:
+        - name: sabiane-data-api
+          image: inseefrlab/sabiane-data:webclient
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "3.2"
+              memory: "12.2Gi"
+            requests:
+              cpu: "3"
+              memory: "12Gi"
+          env:
+            - name: FR_INSEE_SABIANEDATA_API_HOST
+              value: "sabiane-data-api.dev.insee.io"
+            - name: FR_INSEE_SABIANEDATA_API_SCHEME
+              value: "https"
+            - name: FR_INSEE_SABIANEDATA_DELAY_MS
+              value: "20"
+      tolerations:
+        - key: "metallica"
+          operator: "Equal"
+          value: "perf"
+          effect: "NoSchedule"
+

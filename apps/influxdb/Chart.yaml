@@ -1,0 +1,7 @@
+apiVersion: v2
+name: my-influxdb
+version: 1.0.0
+dependencies:
+  - name: influxdb
+    version: 4.9.14
+    repository: https://influxdata.github.io/helm-charts

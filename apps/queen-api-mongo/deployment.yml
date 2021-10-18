@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queen-api-mongo
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: queen-api-mongo
+  template:
+    metadata:
+      labels:
+        app: queen-api-mongo
+    spec:
+      containers:
+        - name: queen-api-mongo
+          image: inseefr/queen-back-office:glowroot-micrometer
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: "6.2"
+              memory: "12.2Gi"
+            requests:
+              cpu: "6"
+              memory: "12Gi"
+          env:
+            - name: JAVA_OPTS
+              value: '-Dlogging.config=classpath:log4j2.xml -Dspring.profiles.active=dev -Dspring.config.location=classpath:/,${CATALINA_BASE}/webapps/queenbo.properties'
+            - name: SPRING_DATA_MONGODB_URI
+              valueFrom:
+                secretKeyRef:
+                  name: queen-api-mongo-secret
+                  key: spring.data.mongodb.uri
+            - name: SPRING_DATA_MONGODB_DATABASE
+              value: 'admin'
+            - name: FR_INSEE_QUEEN_LOGGING_LEVEL
+              value: 'ERROR'
+      tolerations:
+        - key: "metallica"
+          operator: "Equal"
+          value: "perf"
+          effect: "NoSchedule"
+

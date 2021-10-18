@@ -1,0 +1,27 @@
+mongodb:
+  architecture: replicaset
+  useStatefulSet: true  
+  arbiter:
+    enabled: false
+  replicaCount: 3
+  auth:
+    username: demo
+    database: admin
+    existingSecret: mongodb-secret
+  rbac:
+    create: true
+  metrics:
+    enabled: true
+  resources:
+    limits:
+      cpu: "2.2"
+      memory: "4.2Gi"
+    requests:
+      cpu: "2"
+      memory: "4Gi"
+  tolerations:   
+    - key: "metallica"
+      operator: "Equal"
+      value: "perf"
+      effect: "NoSchedule"
+          

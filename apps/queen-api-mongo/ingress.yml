@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: queen-api-mongo
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+    - hosts:
+        - queen-api-mongo.dev.insee.io
+  rules:
+    - host: queen-api-mongo.dev.insee.io
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: queen-api-mongo
+                port:
+                  number: 8080
