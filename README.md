@@ -15,7 +15,7 @@
 - les scénarios métiers à tester (./scenarios)
 - les scripts js de test de performance k6 (load-test/k6)
 
-Un node pool de 3 VMs dédiées a été créé pour ce POC (via script terraform [ici](https://github.com/InseeFrLab/dev.insee.io/blob/master/terraform/cluster.tf)). Il vient se rajouter au node pool déjà existant sur le cluster Kubernetes dev.insee.io. Pour déployer sur ce node pool, il convient de préciser dans les helm charts le bloc :
+Un node pool de 3 VMs dédiées a été créé pour ce POC (via script terraform [ici](https://github.com/InseeFrLab/dev.insee.io/blob/master/terraform/cluster.tf)). Il vient se rajouter au node pool déjà existant sur le cluster Kubernetes managé dev.insee.io. Pour déployer sur ce node pool, il convient de préciser dans les helm charts le bloc :
 ```yaml
 tolerations:
   - key: "metallica"
