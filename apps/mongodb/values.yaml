@@ -1,6 +1,5 @@
 mongodb:
-  architecture: replicaset
-  useStatefulSet: true  
+  architecture: replicaset  
   arbiter:
     enabled: false
   replicaCount: 3
