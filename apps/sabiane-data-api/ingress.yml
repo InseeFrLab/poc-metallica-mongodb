@@ -1,4 +1,4 @@
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: sabiane-data-api
@@ -9,12 +9,15 @@ metadata:
 spec:
   tls:
     - hosts:
-      - sabiane-data-api.dev.insee.io
+        - sabiane-data-api.dev.insee.io
   rules:
     - host: sabiane-data-api.dev.insee.io
       http:
         paths:
           - path: /
+            pathType: Prefix
             backend:
-              serviceName: sabiane-data-api
-              servicePort: http
+              service:
+                name: sabiane-data-api
+                port:
+                  number: 8080
