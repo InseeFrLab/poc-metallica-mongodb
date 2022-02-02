@@ -1,5 +1,5 @@
 mongodb:
-  architecture: replicaset  
+  architecture: replicaset
   arbiter:
     enabled: false
   replicaCount: 3
@@ -11,10 +11,12 @@ mongodb:
     create: true
   metrics:
     enabled: true
+    image:
+      tag: 0.11.2-debian-10-r393
   resources:
     limits:
       cpu: "2.2"
-      memory: "4.2Gi"
+      memory: "6Gi"
     requests:
       cpu: "2"
       memory: "4Gi"
