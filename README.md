@@ -61,7 +61,7 @@ tolerations:
 |---|---|
 | host  | https://grafana-poc-metallica.dev.insee.io |
 | username  | admin |
-| password  | ```kubectl get secret -n gr-queen my-grafana -o jsonpath="{.data.admin-password}" \| base64 --decode ; echo``` |
+| password  | ```kubectl get secret -n $ns my-grafana -o jsonpath="{.data.admin-password}" \| base64 --decode ; echo``` |
 
 * API Queen mode postgresql
 
