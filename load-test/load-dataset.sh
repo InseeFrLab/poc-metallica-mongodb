@@ -1,6 +1,6 @@
 #!/bin/bash
 occurences=40000
-db="postgresql"
+db="mongodb"
  
 case $db in
   mongodb) plateform="QF1";;
@@ -10,7 +10,7 @@ esac
 
 #Step 1 : init context
 
-http_code_context=$(curl -o /dev/null -s -w "%{http_code}" -X POST "https://queen-api-postgres.dev.insee.io/api/create-dataset")
+http_code_context=$(curl -o /dev/null -s -w "%{http_code}" -X POST "https://queen-api-mongo.dev.insee.io/api/create-dataset")
 echo $http_code_context
 
 #Step 2 : init survey units
