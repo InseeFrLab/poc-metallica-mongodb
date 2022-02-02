@@ -15,6 +15,6 @@ echo $http_code_context
 
 #Step 2 : init survey units
  if [ ${http_code_context} -eq 200 ]; then
-    curl -X POST "https://sabiane-data-api.dev.insee.io/queen/api/integrate-generated-data?campaign=VQS2021X00&questionnaireId=VQS2021X00&occurrences=${occurences}&index=1&plateform=${plateform}&better=true"
+    curl -X POST "https://sabiane-data-api.dev.insee.io/queen/api/integrate-generated-data?campaign=VQS2021X00&questionnaireId=VQS2021X00&occurrences=${occurences}&index=1&plateform=${plateform}"
  fi
 
