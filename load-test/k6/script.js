@@ -105,7 +105,7 @@ export default function (data) {
         const params = { headers: { "Content-type": "application/json" } };
 
         const res5 = http.put(
-          `${__ENV.PROTOCOL}://${__ENV.HOSTNAME}/api/survey-unit/better/${idSurveyUnit}/data`,
+          `${__ENV.PROTOCOL}://${__ENV.HOSTNAME}/api/survey-unit/${idSurveyUnit}/data`,
           iterationData,
           params
         );
