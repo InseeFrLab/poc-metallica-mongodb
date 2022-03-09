@@ -5,7 +5,7 @@ mongodb:
   replicaCount: 3
   auth:
     username: demo
-    database: admin
+    database: poc
     existingSecret: mongodb-secret
   rbac:
     create: true
@@ -25,4 +25,25 @@ mongodb:
       operator: "Equal"
       value: "perf"
       effect: "NoSchedule"
+  initContainers:
+    - name: import-dump
+      image: busybox
+      command: [ sh, -c ]
+      args:
+        [
+          "wget https://io1h80.minio.lab.sspcloud.fr/diffusion/import.bson --output-document=/import/import.bson
+          && echo 'mongorestore --uri \"mongodb://$mongo_user:$mongo_pass@localhost:27017\" -c pokemon --drop --db poc 
+          --authenticationDatabase admin /docker-entrypoint-initdb.d/import.bson' > /import/import.sh && cat /import/import.sh"
+        ]
+      volumeMounts:
+        - mountPath: /import
+          name: import-volume
+
+  extraVolumes:
+    - name: import-volume
+      emptyDir: {}
+
+  extraVolumeMounts:
+    - name: import-volume
+      mountPath: "/docker-entrypoint-initdb.d"
           
