@@ -29,11 +29,15 @@ mongodb:
     - name: import-dump
       image: busybox
       command: [ sh, -c ]
+      env:
+        - name: DUMP_URI
+          value: https://io1h80.minio.lab.sspcloud.fr/diffusion/dump.zip
       args:
         [
-          "wget https://io1h80.minio.lab.sspcloud.fr/diffusion/import.bson --output-document=/import/import.bson
-          && echo 'mongorestore --uri \"mongodb://$mongo_user:$mongo_pass@localhost:27017\" -c pokemon --drop --db poc 
-          --authenticationDatabase admin /docker-entrypoint-initdb.d/import.bson' > /import/import.sh && cat /import/import.sh"
+          "wget $DUMP_URI --output-document=/import/dump.zip
+          && unzip /import/dump.zip -d /import
+          && echo 'mongorestore --uri \"mongodb://$mongo_user:$mongo_pass@localhost:27017\" --drop 
+          --authenticationDatabase admin /docker-entrypoint-initdb.d/dump/' > /import/import.sh"
         ]
       volumeMounts:
         - mountPath: /import
