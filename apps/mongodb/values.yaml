@@ -28,10 +28,10 @@ mongodb:
   initContainers:
     - name: import-dump
       image: busybox
-      command: [ sh, -c ]
       env:
         - name: DUMP_URI
           value: https://io1h80.minio.lab.sspcloud.fr/diffusion/dump.zip
+      command: [ sh, -c ]
       args:
         [
           "wget $DUMP_URI --output-document=/import/dump.zip
