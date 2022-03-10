@@ -21,3 +21,23 @@ postgresql:
         operator: "Equal"
         value: "perf"
         effect: "NoSchedule"
+    # extraInitContainers:
+    #   - name: import-dump
+    #     image: busybox
+    #     command:
+    #       [
+    #         "wget",
+    #         "https://changeme/backup.sql",
+    #         "--output-document=/import/backup.sql",
+    #       ]
+    #     volumeMounts:
+    #       - mountPath: /import
+    #         name: import-volume
+
+    # extraVolumes:
+    #   - name: import-volume
+    #     emptyDir: {}
+
+    # extraVolumeMounts:
+    #   - name: import-volume
+    #     mountPath: "/docker-entrypoint-initdb.d"
