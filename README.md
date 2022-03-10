@@ -31,7 +31,7 @@ tolerations:
 | parameter  | value  |
 |---|---|
 | uri  |  ```echo mongodb://demo:$(kubectl get secret -n $ns mongodb-secret -o jsonpath="{.data.mongodb-password}" \| base64 --decode ; echo)@my-mongodb-0.my-mongodb-headless:27017,my-mongodb-1.my-mongodb-headless:27017,my-mongodb-2.my-mongodb-headless:27017``` |
-| database  | admin |
+| database  | poc |
 
 * Postgresql (accessible au sein du cluster uniquement)
 
